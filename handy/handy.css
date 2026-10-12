@@ -1,0 +1,127 @@
+/* Handy-Darstellung für die klassische Seite.
+   Das Original-Stylesheet (templates/bluetmp/css/styles.css) bleibt unangetastet und gilt am PC allein.
+   Alles hier unten greift erst unter 980 px Fensterbreite – so breit ist die alte Seite (960 px + Rand). */
+
+/* --- am PC: Zusätze unsichtbar, Telefonnummer sieht aus wie normaler Text --- */
+#handy-leiste, .such-knopf { display: none; }
+a.tel:link, a.tel:visited, a.tel:hover { color: inherit; text-decoration: none; cursor: inherit; pointer-events: none; }
+
+@media (max-width: 979px) {
+  html { height: auto; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-padding-top: 64px; }
+  body { font-size: 16px; line-height: 1.55; }
+  body.background { position: static; width: auto; background: #d0d5d6; }
+  #main { margin: 0; }
+
+  /* --- Kopf: dasselbe blaue Band, nur flacher; der Schriftzug passt sich der Breite an --- */
+  #header { width: auto; height: 76px; background-size: cover; background-position: center; border-bottom: 0; }
+  #header .logo { left: 8px; top: 50%; width: calc(100% - 16px); max-width: 430px; height: auto; transform: translateY(-40%); }
+
+  /* --- Leiste: Menü, Anruf, Sprachen; bleibt beim Scrollen oben stehen --- */
+  #handy-leiste { display: flex; align-items: stretch; position: sticky; top: 0; z-index: 20; height: 52px; background: #fff; border-bottom: 1px solid #d5dadd; box-shadow: 0 1px 4px rgba(0, 0, 0, .14); }
+  .handy-menue { flex: 1 1 auto; min-width: 0; }
+  .handy-menue > summary { display: flex; align-items: center; gap: 12px; height: 52px; padding: 0 16px; font-size: 16px; font-weight: bold; color: #134E8B; cursor: pointer; list-style: none; -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; }
+  .handy-menue > summary::-webkit-details-marker { display: none; }
+  .handy-menue > summary:focus-visible, .handy-anruf:focus-visible, .handy-sprachen a:focus-visible { outline: 2px solid #134E8B; outline-offset: -4px; }
+  .handy-menue[open] > summary { background: #eef2f5; }
+  .striche { flex: 0 0 auto; width: 20px; height: 2px; background: currentColor; box-shadow: 0 -6px 0 currentColor, 0 6px 0 currentColor; }
+  .handy-menue > ul.menu { position: absolute; left: 0; right: 0; top: 100%; max-height: calc(100vh - 52px); max-height: calc(100dvh - 52px); overflow-y: auto; overscroll-behavior: contain; margin: 0; background: #fff; border-top: 1px solid #d5dadd; box-shadow: 0 10px 18px rgba(0, 0, 0, .28); }
+  .handy-menue ul { margin: 0; list-style: none; }
+  .handy-menue ul.menu > li { border-bottom: 1px solid #e4e4e4; }
+  .handy-menue a:link, .handy-menue a:visited { display: block; padding: 13px 16px 13px 42px; font-weight: bold; color: #666; text-decoration: none; background: url(../templates/bluetmp/images/arrow2.gif) 16px 50% no-repeat; }
+  .handy-menue li li a:link, .handy-menue li li a:visited { padding-left: 62px; background: none; border-top: 1px solid #eef0f1; }
+  .handy-menue li.active > a:link, .handy-menue li.active > a:visited, .handy-menue li.current > a:link, .handy-menue li.current > a:visited { color: #134E8B; }
+  .handy-menue li.current > a { background-color: #f3f6f9; }
+  .handy-anruf { display: flex; flex: 0 0 52px; align-items: center; justify-content: center; border-left: 1px solid #e4e4e4; }
+  a.handy-anruf:link, a.handy-anruf:visited { color: #134E8B; }
+  .handy-sprachen { display: flex; flex: 0 0 auto; align-items: center; padding: 0 4px; border-left: 1px solid #e4e4e4; }
+  .handy-sprachen ul { display: flex; margin: 0; list-style: none; }
+  .handy-sprachen a { display: flex; align-items: center; justify-content: center; width: 42px; height: 52px; }
+  .handy-sprachen img { width: 24px; height: 16px; border: 1px solid #c9ced2; }
+  .handy-sprachen li.lang-active a { box-shadow: inset 0 -3px 0 #134E8B; }
+
+  /* --- Aufbau: eine Spalte. Reihenfolge wie im Quelltext: Inhalt, Kontakt und Suche, Foto, News --- */
+  #wrapper { width: auto; }
+  #main-content { padding: 0 0 12px; }
+  #comp, #comp_60, #comp_80, #comp_100, #leftbar-w, #rightbar-w { float: none; width: auto; min-height: 0; }
+  #comp-i { padding: 14px 16px 6px; }
+  .bot1 { display: none; }
+
+  /* --- Text --- */
+  .item-page h1, .item-page h2, .item-page h3, .search h3 { font-size: 20px; line-height: 1.3; padding: 8px 0; }
+  .item-page h4 { font-size: 17px; line-height: 1.35; }
+  .item-page p { margin-bottom: 12px; }
+  .item-page [align="justify"], .item-page [style*="justify"] { text-align: left !important; }
+  .item-page ul, .item-page ol { margin: 0 0 4px 22px; }
+  .item-page li { margin-bottom: 7px; }
+  .item-page img { max-width: 100%; height: auto; }
+  .item-page img[style*="float"] { width: 120px; margin: 4px 14px 8px 0; }
+  .item-page table { display: block; max-width: 100%; overflow-x: auto; }
+  .item-page, .search { overflow-wrap: break-word; }
+  /* aus Word eingefügte Texte bringen eigene Schriften und Größen mit: am Handy einheitlich */
+  .item-page [style*="font-size"] { font-size: inherit !important; }
+  .item-page [style*="font-family"] { font-family: inherit !important; }
+  .item-page [style*="line-height"] { line-height: inherit !important; }
+  /* Leerzeilen der alten Seite: am Handy nur noch ein kleiner Abstand */
+  .leer { height: 10px; margin: 0 !important; padding: 0 !important; font-size: 1px !important; line-height: 10px !important; overflow: hidden; }
+  .leer + .leer { height: 6px; }
+  .leer + .leer + .leer { display: none; }
+
+  /* --- Seitenleisten: Menü und Sprachen stecken am Handy in der Leiste oben --- */
+  .mod-sprache, .mod-menue, .mod-abstand { display: none; }
+  #leftbar-w #sidebar, #rightbar-w #sidebar { display: flex; flex-direction: column; }
+  #sidebar .module { padding: 0 16px; }
+  #sidebar .module-body { padding: 0; border-bottom: 0; }
+  #sidebar .module-body p { margin: 0 0 4px; }
+  #sidebar .mod-kontakt { order: 1; margin-top: 10px; }
+  #sidebar .mod-zeiten { order: 2; }
+  #sidebar .mod-suche { order: 3; }
+  .mod-kontakt hr { margin-bottom: 10px; }
+  a.tel:link, a.tel:visited { display: inline-block; padding: 9px 0; color: blue; cursor: pointer; pointer-events: auto; }
+  .mod-kontakt [id^="cloak"] a { display: inline-block; padding: 9px 0; }
+  .mod-zeiten .module-body { padding-top: 6px !important; }
+  .mod-suche .search { display: flex; align-items: center; gap: 8px; padding: 12px 0 4px; border-top: 2px solid #eee; margin-top: 8px; }
+  .mod-suche label { flex: 0 0 auto; }
+  .mod-suche .inputbox { flex: 1 1 auto; min-width: 0; height: 44px; padding: 0 12px; font: inherit; color: #333; border: 1px solid #b4bcc2; border-radius: 3px; -webkit-appearance: none; appearance: none; }
+  .such-knopf { display: flex; flex: 0 0 44px; align-items: center; justify-content: center; height: 44px; padding: 0; color: #fff; background: #134E8B; border: 0; border-radius: 3px; cursor: pointer; }
+
+  #sidebar .mod-foto { margin-top: 14px; padding-top: 20px; border-top: 2px solid #eee; text-align: center; }
+  .mod-foto img { max-width: 100%; height: auto; vertical-align: top; }
+  #sidebar .mod-news { margin-top: 20px; }
+  #sidebar .mod-news .module-title { height: auto; padding: 8px 14px; line-height: 1.3; background: #134E8B linear-gradient(#1c68d0, #0f4faf); border-radius: 3px; }
+  .mod-news h4 { padding: 12px 0 4px; font-size: 16px; }
+  .mod-news ul.newsfeed { margin: 0 0 0 20px; }
+  #sidebar .mod-news ul.newsfeed li { margin: 0; }
+  .mod-news h5 { padding: 7px 0; }
+
+  /* --- Suchergebnisse --- */
+  #searchForm fieldset { margin: 12px 0; }
+  #searchForm legend { padding: 0 0 4px; font-weight: bold; }
+  #searchForm .word { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  #searchForm .word label { flex: 0 0 100%; }
+  #searchForm .word .inputbox { flex: 1 1 140px; min-width: 0; height: 44px; padding: 0 12px; font: inherit; border-radius: 3px; -webkit-appearance: none; appearance: none; }
+  #searchForm .button { height: 44px; padding: 0 16px; font-size: 16px; border-radius: 3px; }
+  #searchForm select.inputbox { height: 40px; font: inherit; max-width: 100%; }
+  #searchForm input[type="radio"], #searchForm input[type="checkbox"] { width: 20px; height: 20px; margin: 0 6px 0 0; vertical-align: -4px; }
+  #searchForm .phrases-box label, #searchForm .only label { line-height: 36px; }
+  #searchForm .phrases-box label::after, #searchForm .only label::after { content: "\A"; white-space: pre; }   /* je Auswahl eine Zeile */
+  #searchForm .ordering-box, #searchForm .form-limit { margin-top: 6px; }
+  .search-results dt { margin-top: 16px; font-size: 17px; }
+  .search-results dd { margin-top: 2px; }
+  .search .pagination > div { display: flex; flex-wrap: wrap; gap: 6px; margin: 18px 0 6px; }
+  .search .pagination span, .search .pagination a { display: inline-block; padding: 8px 12px; }
+  .search .pagination strong { display: contents; }
+
+  /* --- Fuß --- */
+  #bottom { width: auto; padding: 10px 16px 18px; }
+  .design { float: none; padding: 0; text-align: center; line-height: 1.6; }
+}
+
+/* etwas breiter (Tablet, schmales Fenster): Text nicht über die ganze Breite ziehen */
+@media (min-width: 700px) and (max-width: 979px) {
+  #header, #wrapper, #handy-leiste, #bottom { max-width: 720px; margin-left: auto; margin-right: auto; }
+  #main { padding-top: 16px; }
+  #header { border-radius: 6px 6px 0 0; }
+  #main-content { border-radius: 0 0 6px 6px; }
+  #comp-i { padding: 20px 28px 8px; }
+  #sidebar .module { padding: 0 28px; }
+}

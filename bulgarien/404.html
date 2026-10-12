@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<title>Marinov &amp; Partner Steuerberater - Seite nicht gefunden</title>
+<style>
+body { margin: 0; padding: 40px 16px; font: 16px/1.5 Arial, Helvetica, sans-serif; color: #555; background: #d0d5d6; }
+div { max-width: 520px; margin: 0 auto; padding: 24px; background: #fff; border-radius: 6px; }
+h1 { margin: 0 0 12px; font-size: 20px; color: #134E8B; }
+a { color: blue; }
+</style>
+<script>
+// Adressen der alten Joomla-Seite auf die neuen Dateien umleiten
+(function () {
+  var SEITEN = ["beratung-fuer.html", "beratung-fuer/bulgaren.html", "beratung-fuer/deutsche.html", "bg/beratung-fuer-bg.html", "bg/beratung-fuer-bg/bulgaren-bg.html", "bg/beratung-fuer-bg/deutsche-buerger-bg.html", "bg/gebuehren-bg.html", "bg/impressum-bg.html", "bg/index.html", "bg/karriere-bg.html", "bg/links-bg.html", "bg/wir-ueber-uns-bg/kanzlei-bg.html", "bg/wir-ueber-uns-bg/partner-bg.html", "bg/wir-ueber-uns-bg/philosophie-bg.html", "gebuehren.html", "impressum.html", "index.html", "karriere.html", "links.html", "we-over-us/kanzlei.html", "we-over-us/partner.html", "we-over-us/philosophie.html"];
+  var ARTIKEL = {};
+  var pfad = decodeURIComponent(location.pathname), i = pfad.indexOf('/index.php');
+  if (i < 0) return;
+  var wurzel = pfad.slice(0, i + 1);
+  var teile = pfad.slice(i + '/index.php'.length).split('/').filter(Boolean);
+  var sprache = ['de', 'en', 'bg'].indexOf(teile[0]) >= 0 ? teile.shift() : 'de';
+  var vor = sprache === 'de' ? '' : sprache + '/';
+  var ziel = vor + (teile.length ? teile.join('/') + '.html' : 'index.html');
+  if (teile[0] === 'component' && teile[1] === 'search') ziel = vor + 'suche.html' + location.search;
+  else if (teile[0] === 'component') ziel = ARTIKEL[sprache + '/' + teile[teile.length - 1]] || vor + 'index.html';
+  else if (SEITEN.indexOf(ziel) < 0) ziel = vor + 'index.html';
+  location.replace(wurzel + ziel + location.hash);
+})();
+</script>
+</head>
+<body>
+<div>
+<h1>Seite nicht gefunden</h1>
+<p>Diese Adresse gibt es nicht (mehr). <a href="/">Zur Startseite</a></p>
+<p lang="en">This page does not exist (any more). <a href="/">Go to the home page</a></p>
+</div>
+</body>
+</html>
